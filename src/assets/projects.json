@@ -1,0 +1,9 @@
+{
+    "hoprikoff":{
+        "name": "Hoprik offical website",
+        "image": "https://static-cse.canva.com/blob/847132/paulskorupskas7KLaxLbSXAunsplash2.jpg",
+        "desc": "Small website a developer hoprik",
+        "tools": ["react", "express", "javascript"],
+        "url": "hopikoffical"
+    }
+}
