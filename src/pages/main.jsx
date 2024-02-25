@@ -4,18 +4,27 @@ import About from "../components/about";
 import Projectcart from "../components/projectcart";
 import Socialbutton from "../components/socialbutton";
 import Mobilenavbar from "../components/mobilenavbar";
+import projects from '../assets/projects.json'
 
 function getExactAge(date) {
-    const dob = new Date(date); // Дата рождения
-    const today = new Date(); // Текущая дата
-    const ageInMillis = today - dob; // Разница в миллисекундах
-    const ageInSeconds = ageInMillis / 1000; // Разница в секундах
-    const ageInYears = ageInSeconds / (24 * 3600 * 365.25); // Вычисляем возраст в годах
-    return ageInYears.toFixed(3) // Округляем в меньшую сторону
+    const dob = new Date(date);
+    const today = new Date(); 
+    const ageInMillis = today - dob; 
+    const ageInSeconds = ageInMillis / 1000; 
+    const ageInYears = ageInSeconds / (24 * 3600 * 365.25); 
+    return ageInYears.toFixed(3) 
 }
 
 function Main(){
     const year = getExactAge("2008.10.10")
+    const json = JSON.parse(JSON.stringify(projects));
+    const projects_array = []
+    Object.keys(json).forEach(item=>{
+        const project = json[item];
+        projects_array.push(<Projectcart projectName = {project.name} projectDescription = {project.desc} projectTools = {project.tools} projectUrl={project.url} image={project.image}/>)
+    })
+    console.log(projects_array);
+    
     return <>
         <Navbar/>
         <Mobilenavbar/>
@@ -34,7 +43,7 @@ function Main(){
             <Page anchor="info">
                 <div className="secondpage">
                     <About>
-                        Привет, меня зовут Хоприк. Мне {year} лет и увлекаюсь программированием. Я занимаюсь этим уже {"{time coding}"} и владею такими языками и технологиями, как python, java, c#, frontend, js, react, express и другие. Кроме того, я интересуюсь другими IT-направлениями: 3D-моделированием, видеомонтажом, фотошопом.
+                        Привет, меня зовут Хоприк. Мне {year} лет и увлекаюсь программированием. Я занимаюсь этим уже {"800 часов"} и владею такими языками и технологиями, как python, java, c#, frontend, js, react, express и другие. Кроме того, я интересуюсь другими IT-направлениями: 3D-моделированием, видеомонтажом, фотошопом.
 
                     </About>
                     <About right={false}>
@@ -45,10 +54,9 @@ function Main(){
             <Page anchor="projects">
                 <div className="thirdpage">
                     <div className="thirdpage_floor">
-                            <Projectcart projectName="Hoprikruoff"
-                                     projectUrl="https://www.youtube.com/watch?v=r1tzVD2IRH0&ab_channel=maxter"/>
-                        <Projectcart/>
-                        <Projectcart/>
+                    {projects_array.map((project) => (
+                        project 
+                    ))}
                     </div>
                 </div>
             </Page>
@@ -64,7 +72,7 @@ function Main(){
                     </div>
                     <div className="fourthpage_floor">
                         <Socialbutton network="telegram" href="https://t.me/hoprik" text="Telegram" color="#0071F5"/>
-                        <Socialbutton href="https://mynickname.com/certificates/1413357" text="My nickname" color="#B14000"/>
+                        <Socialbutton href="https://mynickname.com/id1782903" text="My nickname" color="#B14000"/>
                     </div>
                 </div>
             </Page>
