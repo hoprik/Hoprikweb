@@ -1,6 +1,6 @@
-function Navbar() {
+defunction Navbar() {
     return <div className="navbar">
-        <a href="/" className="navbar_logo">Hoprik.ru</a>
+        <a href="/" className="navbar_logo">Hoprik</a>
         <div className="navbar_menu">
             <a href="#info" className="navbar_item">Обо мне</a>
             <a href="#projects" className="navbar_item">Проекты</a>

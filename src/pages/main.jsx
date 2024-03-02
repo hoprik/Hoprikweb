@@ -4,7 +4,12 @@ import About from "../components/about";
 import Projectcart from "../components/projectcart";
 import Socialbutton from "../components/socialbutton";
 import Mobilenavbar from "../components/mobilenavbar";
+import End from "../components/end";
 import projects from '../assets/projects.json'
+import mainImg from "../assets/main.png"
+import terraia from "../assets/terraia.png"
+import hoprikNormal from "../assets/hoprik_normal.png"
+import hoprikPizedec from "../assets/hoprik_pizdec.png"
 
 function getExactAge(date) {
     const dob = new Date(date);
@@ -12,18 +17,31 @@ function getExactAge(date) {
     const ageInMillis = today - dob; 
     const ageInSeconds = ageInMillis / 1000; 
     const ageInYears = ageInSeconds / (24 * 3600 * 365.25); 
-    return ageInYears.toFixed(3) 
+    return ageInYears.toFixed(3).toString().replace(".", ",")
 }
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+
+
 function Main(){
+    const random = getRandomInt(100)
+    console.log(random)
     const year = getExactAge("2008.10.10")
     const json = JSON.parse(JSON.stringify(projects));
-    const projects_array = []
+    let array = [];
+    let size = 3;
+    let projects_array = [];
     Object.keys(json).forEach(item=>{
         const project = json[item];
-        projects_array.push(<Projectcart projectName = {project.name} projectDescription = {project.desc} projectTools = {project.tools} projectUrl={project.url} image={project.image}/>)
+        array.push(<Projectcart projectName = {project.name} projectDescription = {project.desc} projectTools = {project.tools} projectUrl={project.url} image={project.image}/>)
     })
-    console.log(projects_array);
+    for (let i = 0; i < Math.ceil(array.length / size); i++) {
+        projects_array[i] = array.slice(i * size, (i + 1) * size);
+    }
+    console.log(projects_array)
     
     return <>
         <Navbar/>
@@ -32,32 +50,36 @@ function Main(){
             <Page>
                 <div className="firstpage">
                     <div className="firstpage_logo">
-                        <h1 className="firstpage_logo_h1">Hoprik.ru</h1>
-                        <a href="#info" className="firstpage_logo_button">Иследовать</a>
+                        <h1 className="firstpage_logo_h1">Hoprik</h1>
+                        <a href="#info" className="firstpage_logo_button">Исследовать</a>
                     </div>
                     <div className="firstpage_image">
-                        <div className="firstpage_image_image"></div>
+                        <img className="firstpage_image_image" style={{backgroundImage: `url(${mainImg})`}}/>
                     </div>
                 </div>
             </Page>
             <Page anchor="info">
                 <div className="secondpage">
-                    <About>
+                    <About url={terraia}>
                         Привет, меня зовут Хоприк. Мне {year} лет и увлекаюсь программированием. Я занимаюсь этим уже {"800 часов"} и владею такими языками и технологиями, как python, java, c#, frontend, js, react, express и другие. Кроме того, я интересуюсь другими IT-направлениями: 3D-моделированием, видеомонтажом, фотошопом.
 
                     </About>
-                    <About right={false}>
+                    <About url={random === 69? hoprikPizedec: hoprikNormal} right={false}>
                         В реальной жизни меня зовут Валера. Я живу в Ярославле и учусь в 8 классе школы №9. Мне нравятся пельмени. Я отношусь нейтрально к фурри, политике и ЛГБТ-движению. Я не очень хороший собеседник: мои шутки кринжовые и про туалет. Сейчас я учусь в Коде Будущего, 3D-моделированию и программированию.
                     </About>
                 </div>
             </Page>
             <Page anchor="projects">
                 <div className="thirdpage">
-                    <div className="thirdpage_floor">
                     {projects_array.map((project) => (
-                        project 
+                        <div className="thirdpage_floor">
+                            {
+                                project.map((item) => {
+                                    return item
+                                })
+                            }
+                        </div>
                     ))}
-                    </div>
                 </div>
             </Page>
             <Page anchor="social">
@@ -77,6 +99,7 @@ function Main(){
                 </div>
             </Page>
         </main>
+        <End/>
     </>
 }
 

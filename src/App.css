@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap');
 
 *{
-    font-family: "Open Sans", sans-serif;
+    font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
     font-variation-settings: "wdth" 100;
@@ -189,14 +189,15 @@ body{
     height: 0;
     padding-bottom: 35%;
     margin-left: 10%;
-    background-color: #D9D9D9;
 
 }
 
 .firstpage_image_image{
     width: 100%;
-    height: 100%;
-    background-color: blue;
+    height: 0;
+    padding-bottom: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .secondpage{
@@ -220,7 +221,6 @@ body{
     width: 17%;
     height: 0;
     padding-bottom: 17%;
-    background-color: #D9D9D9;
     margin-left: 25px;
     margin-right: 25px;
 }
@@ -228,8 +228,10 @@ body{
 
 .secondpage_floor_image_image{
     width: 100%;
-    height: 100%;
-    background-color: blue;
+    height: 0;
+    padding-bottom: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .secondpage_floor_text_wrapper{
@@ -376,7 +378,11 @@ body{
     height: calc(30vw / 5);
 }
 
-
+footer{
+    width: 100%;
+    height: 20vh;
+    border-top: dashed white 1px;
+}
 
 
 @media screen and (max-width: 1150px) {
