@@ -1,0 +1,37 @@
+{
+    "hoprikoff":{
+        "name": "Офицальный сайт хоприка",
+        "image": "https://static-cse.canva.com/blob/847132/paulskorupskas7KLaxLbSXAunsplash2.jpg",
+        "desc": "Маленький сайт, хоприка",
+        "tools": ["react", "express", "javascript"],
+        "url": "/"
+    },
+    "miroengine":{
+        "name": "MiroEngine",
+        "image": "https://static-cse.canva.com/blob/847132/paulskorupskas7KLaxLbSXAunsplash2.jpg",
+        "desc": "Сюжетный движок для майнкрафт",
+        "tools": ["java", "gradle"],
+        "url": "hopikoffical"
+    },
+    "hoprikru":{
+        "name": "hoprik.ru",
+        "image": "https://static-cse.canva.com/blob/847132/paulskorupskas7KLaxLbSXAunsplash2.jpg",
+        "desc": "3d-версия дома хоприка",
+        "tools": ["threejs", "javascript", "github"],
+        "url": "hopikoffical"
+    },
+    "shizacraft":{
+        "name": "Shizacraft",
+        "image": "https://static-cse.canva.com/blob/847132/paulskorupskas7KLaxLbSXAunsplash2.jpg",
+        "desc": "Самый странный мод на диком западе",
+        "tools": ["java", "gradle"],
+        "url": "hopikoffical"
+    },
+    "csgocase":{
+        "name": "Csgo case simulator",
+        "image": "https://static-cse.canva.com/blob/847132/paulskorupskas7KLaxLbSXAunsplash2.jpg",
+        "desc": "Симулятор открытия кейсов",
+        "tools": ["javascript", "github"],
+        "url": "hopikoffical"
+    }
+}
