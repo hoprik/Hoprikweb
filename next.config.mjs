@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
-module.exports ={
-    output: 'standalone'
-}
-const nextConfig = {};
+const nextConfig = {
+    output: 'standalone',
+    content: [
+        './pages/**/*.{js,ts,jsx,tsx}',
+        './components/**/*.{js,ts,jsx,tsx}',
+    ]
+};
 export default nextConfig;
