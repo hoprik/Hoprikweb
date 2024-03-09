@@ -1,4 +1,3 @@
-"use client"
 import Image from "next/image";
 import Navbar from "../components/navbar";
 import Page from "../components/page";
@@ -8,7 +7,7 @@ import Socialbutton from "../components/socialbutton";
 import Mobilenavbar from "../components/mobilenavbar";
 import End from "../components/end";
 import projects from '../public/projects.json'
-import {SyntheticEvent, useEffect} from "react";
+import Story from "../components/story"
 
 function getExactAge(date: any) {
   const dob: any = new Date(date);
@@ -44,15 +43,8 @@ function Main(){
   const random = getRandomInt(100)
   const year = getExactAge("2008.10.10")
   const projects_array = getProjects();
-  useEffect(() => {
-    const options = {method: 'GET', headers: {'User-Agent': 'insomnia/8.6.1'}};
 
-    // @ts-ignore
-    fetch('http://localhost:3000/api/story', options)
-        .then(response => response.json())
-        .then(response => document.querySelector(".story_hopry").innerHTML = response["answer"])
-        .catch(err => console.error(err));
-  }, []);
+  // @ts-ignore
   return <>
     <Navbar/>
     <Mobilenavbar/>
@@ -80,13 +72,15 @@ function Main(){
           <About url={random === 69? "/hoprik_pizdec.png": "/hoprik_normal.png"} right={false}>
             В реальной жизни меня зовут Валера. Я живу в Ярославле и учусь в 8 классе школы №9. Мне нравятся пельмени. Я отношусь нейтрально к фурри, политике и ЛГБТ-движению. Я не очень хороший собеседник: мои шутки кринжовые и про туалет. Сейчас я учусь в Коде Будущего, 3D-моделированию и программированию.
           </About>
-          <p className="story_hopry">История</p>
+          <About url="/haha.png" >
+            <Story/>
+          </About>
         </div>
       </Page>
       <Page anchor="projects">
         <div className="thirdpage">
-          {projects_array.map((project) => (
-              <div className="thirdpage_floor">
+          {projects_array.map((project, i) => (
+              <div className="thirdpage_floor" key={i}>
                 {
                   project.map((item: JSX.Element) => {
                     return item

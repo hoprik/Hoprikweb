@@ -1,20 +1,20 @@
 import storyJson from "../../../public/story.json"
-function random(max: number) {
-    return Math.floor(Math.random() * max)
-}
-export async function GET() {
+
+export async function POST(request: Request, {params}: {params: {random: number, randomElem: number}}) {
+    console.log(request.json())
     const json = JSON.parse(JSON.stringify(storyJson))
-    const randomStoryType = random(100)
-    console.log(randomStoryType)
+    const reqJson = JSON.parse(JSON.stringify(await request.json()))
+    const randomStoryType = reqJson["random"]
+    const randomElem = reqJson["randomElem"]
     let story = ""
-    if (randomStoryType < 90) {
-        story = json["normal"][random(json["normal"].length)]
+    if (randomStoryType < 60) {
+        story = json["normal"][randomElem]
     }
-    else if (randomStoryType > 90 && randomStoryType < 96){
-        story = json["funny"][random(json["funny"].length)]
+    else if (randomStoryType > 60 && randomStoryType < 90){
+        story = json["funny"][randomElem]
     }
     else{
-        story = json["pizec"][random(json["pizec"].length)]
+        story = json["pizec"][randomElem]
     }
     return Response.json({answer:story})
 }
