@@ -443,6 +443,21 @@ footer{
   border-bottom: 4px dashed #c9c9c9;
 }
 
+.projectcart_wrapper{
+  display: flex;
+  height: 100vh;
+}
+
+.projectcard_left{
+  width: 35%;
+  height: 100%;
+}
+
+.projectcard_right{
+  width: 65%;
+  height: 100%;
+}
+
 
 @media screen and (max-width: 1150px) {
   .fourthpage_floor{

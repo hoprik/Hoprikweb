@@ -1,5 +1,5 @@
 "use client";
-import Page from "../../../components/page";
+import Page from "@/components/page";
 import {useEffect} from "react";
 
 function mark() {
