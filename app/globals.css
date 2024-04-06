@@ -449,6 +449,9 @@ footer{
 }
 
 .projectcard_left{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   width: 35%;
   height: 100%;
 }
@@ -456,6 +459,12 @@ footer{
 .projectcard_right{
   width: 65%;
   height: 100%;
+}
+
+.projectcard_left__img{
+    width: 80%;
+    border-radius: 15px;
+    margin-top: 100px;
 }
 
 
@@ -503,8 +512,7 @@ footer{
   }
 
   .secondpage_floor_text_wrapper{
-    text-align: center;
-    width: 100%;
+    margin: 10px;
   }
 }
 
