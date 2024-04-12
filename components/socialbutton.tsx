@@ -7,6 +7,13 @@ function Socialbutton(props: any) {
             e.preventDefault();
             navigator.clipboard.writeText(href.split(":")[1])
         }
+        else {
+            const a = document.createElement("a")
+            a.href = href
+            a.target = "_blank"
+            a.rel = "noreferrer"
+            a.click()
+        }
     }}>
         <div className="social_icon">
             <Icon nameIcon={network} size="60px"/>
