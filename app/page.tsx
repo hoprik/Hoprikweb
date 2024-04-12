@@ -12,17 +12,7 @@ import Wakatime from "@/components/wakatime"
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
-import mysql from 'serverless-mysql';
-const db = mysql({
-    config: {
-        host: process.env.MYSQL_HOST,
-        port: process.env.MYSQL_PORT,
-        database: process.env.MYSQL_DATABASE,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD
-    }
-});
-
+import ProjectCards from "@/components/projectcards";
 function getExactAge(date: any) {
     dayjs.extend(utc);
     dayjs.extend(timezone);
@@ -38,54 +28,9 @@ function getRandomInt(max: number) {
     return Math.floor(Math.random() * max);
 }
 
-async function getProjects() {
-    const result = await db.query("SELECT * FROM projects")
-    await db.end();
-    let items = {}
-    // @ts-ignore
-    for (const project of result) {
-        // @ts-ignore
-        items[project.name] = {
-            "name": project.display_name,
-            "image": project.image,
-            "desc": project.desc,
-            "tools": project.tools.split(","),
-            "url": project.name
-        };
-    }
-    let array: any = [];
-    let size: number = 3;
-    let projects_array = [];
-    Object.keys(items).forEach(item => {
-        // @ts-ignore
-        const project = items[item];
-        array.push(<Projectcart projectName={project.name} projectDescription={project.desc}
-                                projectTools={project.tools} projectUrl={project.url} image={project.image}/>)
-    })
-    for (let i = 0; i < Math.ceil(array.length / size); i++) {
-        projects_array[i] = array.slice(i * size, (i + 1) * size);
-    }
-    return projects_array;
-}
-
-
-
-
-
 function Main(){
     const random = getRandomInt(100)
     const year = getExactAge("2008.10.10")
-    const _projects_array = getProjects();
-    const projects_array: any[] = []
-    let copy_project =
-    _projects_array.then(value => {
-        value.forEach(project => {
-            projects_array.push(project[0])
-        })
-    }).finally(() => {
-        console.log(projects_array[0])
-    })
-    // console.log(projects_array)
     return <>
         <Navbar/>
         <Mobilenavbar/>
@@ -120,15 +65,7 @@ function Main(){
             </Page>
             <Page anchor="projects">
                 <div className="thirdpage">
-                    {projects_array.map((project, i) => (
-                        <div className="thirdpage_floor" key={i}>
-                            {
-                                project.map((item: JSX.Element) => {
-                                    return item
-                                })
-                            }
-                        </div>
-                    ))}
+                    <ProjectCards/>
                 </div>
             </Page>
             <Page anchor="social">
