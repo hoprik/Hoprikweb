@@ -22,11 +22,11 @@ function Project({params}: {params: {id: string}}) {
                     <div className="projectcart_wrapper">
                         <div className="projectcard_left">
                             <div className="projectcard_left__img">
-                                <img className="projectcard_left__img" src={project.image} alt="" />
+                                <img className="projectcard_left__img" src={project.image} alt=""/>
                             </div>
                         </div>
-                    <div className="projectcard_right"></div>
-                </div>
+                        <div className="projectcard_right"></div>
+                    </div>
                 </>
                 }
             </Page>

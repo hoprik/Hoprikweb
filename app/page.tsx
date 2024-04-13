@@ -2,7 +2,6 @@ import Image from "next/image";
 import Navbar from "@/components/navbar";
 import Page from "@/components/page";
 import About from "@/components/about";
-import Projectcart from "@/components/projectcart";
 import Socialbutton from "@/components/socialbutton";
 import Mobilenavbar from "@/components/mobilenavbar";
 import End from "@/components/end";
