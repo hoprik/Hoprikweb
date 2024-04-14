@@ -17,7 +17,7 @@ function ProjectCart(props: any) {
             ))}
         </div>
         <hr className="projectcart_separator"/>
-        <a href={projectUrl} target="_blank" rel="noopener noreferrer" className="projectcart_link">Подробнее</a>
+        {/*<a href={projectUrl} target="_blank" rel="noopener noreferrer" className="projectcart_link">Подробнее</a>*/}
     </div>
 }
 

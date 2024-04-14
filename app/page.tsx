@@ -12,6 +12,7 @@ import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import ProjectCards from "@/components/projectcards";
+import ClientAbout from "@/components/clientabout";
 function getExactAge(date: any) {
     dayjs.extend(utc);
     dayjs.extend(timezone);
@@ -23,12 +24,9 @@ function getExactAge(date: any) {
     return Math.trunc(today.diff(birthdateObj, "year", true) * Math.pow(10, 3)) / Math.pow(10, 3);
 }
 
-function getRandomInt(max: number) {
-    return Math.floor(Math.random() * max);
-}
+
 
 function Main(){
-    const random = getRandomInt(100)
     const year = getExactAge("2008.10.10")
     return <>
         <Navbar/>
@@ -45,6 +43,7 @@ function Main(){
                             src="/main.png"
                             fill
                             alt="Picture of the author"
+                            style={{borderRadius: "10px"}}
                         />
                     </div>
                 </div>
@@ -54,9 +53,7 @@ function Main(){
                     <About url={"/terraia.png"}>
                         Привет, меня зовут Хоприк. Мне {year} лет и увлекаюсь программированием. Я занимаюсь этим уже <Wakatime/> и владею такими языками и технологиями, как python, java, c#, frontend, js, react, express и другие. Кроме того, я интересуюсь другими IT-направлениями: 3D-моделированием, видеомонтажом, фотошопом.
                     </About>
-                    <About url={random === 69? "/hoprik_pizdec.png": "/hoprik_normal.png"} right={false}>
-                        В реальной жизни меня зовут Валера. Я живу в Ярославле и учусь в 8 классе школы №9. Мне нравятся пельмени. Я отношусь нейтрально к фурри, политике и ЛГБТ-движению. Я не очень хороший собеседник: мои шутки кринжовые и про туалет. Сейчас я учусь в Коде Будущего, 3D-моделированию и программированию.
-                    </About>
+                    <ClientAbout/>
                     <About url="/haha.png" >
                         <Story/>
                     </About>

@@ -28,7 +28,7 @@ export default function ProjectCards() {
             }
         };
 
-        fetch('/api/v1/getAllProjects', options)
+        fetch('/api/v1/projects/getProjects', options)
             .then(response => response.json())
             .then(response => setProjectsCard(response))
             .catch(err => console.error(err));

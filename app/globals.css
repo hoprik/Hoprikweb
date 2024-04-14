@@ -21,13 +21,20 @@ body{
   z-index: 5;
   margin: 0 auto;
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0; width: 90%;
+  top: 0; left: 0; right: 0; bottom: 0; width: 100%;
   height: 75px;
   background: rgba(226, 226, 226, 0.05);
-  border-radius: 16px;
+  border-radius: 0px 0px 16px 16px;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   align-items: center;
+}
+
+.flymode{
+  border-radius: 16px;
+  transform: translate(16px, 5px);
+  width: calc(100% - 100px);
+  transition: 0.5s;
 }
 
 
@@ -362,6 +369,7 @@ body{
   margin: 10px;
   width: 30%;
   height: calc(30vw / 5);
+  cursor: pointer;
 }
 
 .social_link{
@@ -482,6 +490,7 @@ footer{
   border-radius: 10px;
   font-size: 24px;
   text-align: center;
+  border: 0;
 }
 
 .buttonurl{
@@ -492,6 +501,28 @@ footer{
   border: 0;
   padding: 10px 15px;
   border-radius: 10px;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cc0f7d rgb(30, 30, 30);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgb(30, 30, 30);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #cc0f7d;
+  border-radius: 10px;
+  border: 3px solid rgb(30, 30, 30);
 }
 
 

@@ -10,6 +10,7 @@ function About(props: any) {
                             src={url}
                             fill
                             alt="Picture of the author"
+                            style={{borderRadius: "10px"}}
                         />
                     </div>
                     <div className="secondpage_floor_text_wrapper">
@@ -25,6 +26,7 @@ function About(props: any) {
                             src={url}
                             fill
                             alt="Picture of the author"
+                            style={{borderRadius: "10px"}}
                         />
                     </div>
                 </>
