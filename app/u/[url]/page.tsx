@@ -1,14 +1,12 @@
 "use client"
 
-import {useState} from "react";
-import {redirect} from "next/navigation";
 import Page from "@/components/page";
 
 async function getUrl(url: string) {
     const options = {
         method: 'POST',
-        headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.6.1'},
-        body: '{"code":"'+url+'"}'
+        headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.6.1', cache: 'no-store'},
+        body: '{"code":"'+url+'"}',
     };
 
     const res = await fetch('/api/v1/link/get', options)

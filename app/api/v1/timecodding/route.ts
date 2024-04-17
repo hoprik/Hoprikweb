@@ -12,10 +12,10 @@ export async function GET() {
         method: 'GET',
         headers: {
             'User-Agent': 'insomnia/8.6.1',
-            Authorization: `Basic ${process.env.WAKATIME_API}`
+            Authorization: `Basic ${process.env.WAKATIME_API}`,
+            cache: 'no-store'
         }
     };
-    // "860 hrs 24 mins
     const res: Response = await fetch('https://wakatime.com/api/v1/users/hoprik/all_time_since_today', options)
     const data = await res.json()
     const timeSplit = data["data"]["text"].split("hrs")

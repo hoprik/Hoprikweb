@@ -24,10 +24,10 @@ export default function ProjectCards() {
         const options = {
             method: 'GET',
             headers: {
-                'User-Agent': 'insomnia/8.6.1'
+                'User-Agent': 'insomnia/8.6.1',
+                cache: 'no-store'
             }
         };
-
         fetch('/api/v1/projects/getProjects', options)
             .then(response => response.json())
             .then(response => setProjectsCard(response))

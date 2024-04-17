@@ -3,8 +3,6 @@ import Navbar from "@/components/navbar";
 import Mobilenavbar from "@/components/mobilenavbar";
 import End from "@/components/end";
 import Page from "@/components/page";
-import Image from "next/image";
-import projects from "@/public/projects.json"
 
 async function genURL(button: any){
     if (document == null){
@@ -17,7 +15,7 @@ async function genURL(button: any){
     const url = input.value
     const options = {
         method: 'POST',
-        headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.6.1'},
+        headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.6.1', cache: 'no-store'},
         body: `{"url":"${url}"}`
     };
 
@@ -50,9 +48,8 @@ function copyText(){
     _button.innerText = "Скопированно"
 }
 
-function ShortUrl({params}: {params: {id: string}}) {
+function ShortUrl() {
     // @ts-ignore
-    const project = projects[params.id];
     return <>
         <Navbar/>
         <Mobilenavbar/>
@@ -60,7 +57,7 @@ function ShortUrl({params}: {params: {id: string}}) {
             <Page>
                 <div className="url_wrapper">
                     <input type="text" className="texturl" placeholder="Введите ссылку! Начинающийся с http..."/>
-                    <button className="buttonurl" onClick={e=>{genURL(e).then(r => {})}}>Сгенерировать ссылку</button>
+                    <button className="buttonurl" onClick={e=>{genURL(e).then()}}>Сгенерировать ссылку</button>
                 </div>
             </Page>
         </main>
