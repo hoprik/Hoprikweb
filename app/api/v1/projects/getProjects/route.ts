@@ -1,6 +1,9 @@
 import mysql from "mysql2/promise";
 
 export async function GET() {
+    if (!process.env.MYSQL_USER){
+        return Response.json({"error": "env varible MYSQL_USER not found"});
+    }
     let db: mysql.Connection
     try {
         db = await mysql.createConnection({

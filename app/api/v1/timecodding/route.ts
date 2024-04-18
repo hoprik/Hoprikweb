@@ -8,6 +8,9 @@ function declOfNum(n: number, text_forms: [String, String, String]) {
 }
 
 export async function GET() {
+    if (!process.env.WAKATIME_API){
+        return Response.json({"error": "env varible WAKATIME_API not found"});
+    }
     const options = {
         method: 'GET',
         headers: {

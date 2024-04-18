@@ -2,6 +2,9 @@ import mysql from 'mysql2/promise';
 import md5 from 'crypto-js/md5';
 
 export async function POST(req: Request) {
+    if (!process.env.MYSQL_USER){
+        return Response.json({"error": "env varible MYSQL_USER not found"});
+    }
     let db: mysql.Connection
     try {
          db = await mysql.createConnection({
