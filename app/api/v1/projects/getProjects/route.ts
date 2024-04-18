@@ -10,12 +10,17 @@ export async function GET() {
             database: process.env.MYSQL_DATABASE
         });
     }catch (err){
-        db = await mysql.createConnection({
-            host: process.env.MYSQL_HOST,
-            user: process.env.MYSQL_USER,
-            password: process.env.MYSQL_PASSWORD,
-            database: process.env.MYSQL_DATABASE
-        });
+        try{
+            db = await mysql.createConnection({
+                host: process.env.MYSQL_HOST,
+                user: process.env.MYSQL_USER,
+                password: process.env.MYSQL_PASSWORD,
+                database: process.env.MYSQL_DATABASE
+            });
+        }catch(err){
+            return Response.json({"error": "Database connection failed"});
+        }
+
     }
     const result = await db.query("SELECT * FROM projects")
     await db.end();
