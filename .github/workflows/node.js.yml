@@ -39,7 +39,7 @@ jobs:
         run: mkdir -p ./.next/standalone/.next/static && cp -r ./.next/static/* ./.next/standalone/.next/static/
 
       - name: Create readme.txt
-        run: echo "Hello it`s build https://hoprik.ru/ №${{ github.run_number }}, for start working server you need. Node js min 18v and env VARIABLES WAKATIME_API\nMYSQL_HOST\nMYSQL_PORT\nMYSQL_USER\nMYSQL_PASSWORD\nMYSQL_DATABASE\nHOSTNAME (optional)\nPORT (optional)\nAfter set you go to cmd and write command node server.js. And if you did not specify HOSTNAME and PORT, server opened in localhost:3000\Happy stealing ^_____^" > ./.next/standalone/readme.txt
+        run: echo 'Hello it'\''s build https://hoprik.ru/ №15, for start working server you need. Node js min 18v and env VARIABLES WAKATIME_API\nMYSQL_HOST\nMYSQL_PORT\nMYSQL_USER\nMYSQL_PASSWORD\nMYSQL_DATABASE\nHOSTNAME (optional)\nPORT (optional)\nAfter set you go to cmd and write command node server.js. And if you did not specify HOSTNAME and PORT, server opened in localhost:3000\Happy stealing ^_____^' > ./.next/standalone/readme.txt
 
       - name: Archive production artifacts (tar.gz)
         run: cd ./.next/standalone && tar -czvf ../../build-number-${{ github.run_number }}.tar.gz .
@@ -55,7 +55,7 @@ jobs:
         with:
           tag_name: ${{ github.run_number }}
           release_name: Release №${{ github.run_number }}
-          body: It`s ${{ github.run_number }} build! Check commit more info =)
+          body: It's ${{ github.run_number }} build! Check commit more info =)
           draft: false
           prerelease: false
 
