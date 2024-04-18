@@ -16,7 +16,7 @@ jobs:
     - name: Setup Node.js environment
       uses: actions/setup-node@v2
       with:
-        node-version: '21'
+        node-version: '20'
 
     - name: Cache dependencies
       uses: actions/cache@v2
@@ -42,8 +42,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: New release of the Next.js app
+        release_name: Релиз ${{ github.ref }}
+        body: Новый релиз ${{ github.ref }}
         draft: false
         prerelease: false
 
