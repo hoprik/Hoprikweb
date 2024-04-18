@@ -32,8 +32,17 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Archive production artifacts
-        run: tar -czvf standalone.tar.gz ./.next/standalone
+      - name: Copy public folder
+        run: cp -r ./public ./.next/standalone/public
+
+      - name: Copy static folder
+        run: mkdir -p ./.next/standalone/.next/static && cp -r ./.next/static/* ./.next/standalone/.next/static/
+
+      - name: Archive production artifacts (tar.gz)
+        run: tar -czvf build.tar.gz ./.next/standalone
+
+      - name: Archive production artifacts (zip)
+        run: zip -r build.zip ./.next/standalone
 
       - name: Create Release
         id: create_release
@@ -41,19 +50,30 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
-          tag_name: ${{ github.run_id }}
-          release_name: Release ${{ github.run_id }}
+          tag_name: ${{ github.run_number }}
+          release_name: Release №${{ github.run_number }}
           body: New release of the Next.js app
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset
-        id: upload-release-asset
+      - name: Upload Release Asset (tar.gz)
+        id: upload-release-asset-tar
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./standalone.tar.gz
-          asset_name: standalone.tar.gz
+          asset_path: ./build.tar.gz
+          asset_name: build.tar.gz
           asset_content_type: application/gzip
+
+      - name: Upload Release Asset (zip)
+        id: upload-release-asset-zip
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build.zip
+          asset_name: build.zip
+          asset_content_type: application/zip
