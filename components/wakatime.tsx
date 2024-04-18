@@ -2,12 +2,13 @@
 import {useEffect, useState} from "react";
 
 export default function Wakatime() {
-    const [wakaTime, setWakaTime] = useState("800")
+    const [wakaTime, setWakaTime] = useState("0 часов 0 минут")
     useEffect(() => {
         const options = {
             method: 'GET',
             headers: {
-                'User-Agent': 'insomnia/8.6.1'
+                'User-Agent': 'insomnia/8.6.1',
+                cache: 'no-store'
             }
         };
 
