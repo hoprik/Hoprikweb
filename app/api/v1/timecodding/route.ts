@@ -8,9 +8,6 @@ function declOfNum(n: number, text_forms: [String, String, String]) {
 }
 
 export async function GET() {
-    if (!process.env.WAKATIME_API){
-        return Response.json({"error": "env varible WAKATIME_API not found"});
-    }
     const options = {
         method: 'GET',
         headers: {
@@ -21,12 +18,16 @@ export async function GET() {
     };
     const res: Response = await fetch('https://wakatime.com/api/v1/users/hoprik/all_time_since_today', options)
     const data = await res.json()
-    const timeSplit = data["data"]["text"].split("hrs")
-    const hourInt = Number(timeSplit[0])
-    const minutesInt = Number(timeSplit[1].split("mins")[0])
-    const hour = String(hourInt)+" "+declOfNum(hourInt, ["час", 'часа', 'часов']);
-    const minutes = String(minutesInt)+" "+declOfNum(minutesInt, ['минута', 'минуты', 'минут']);
-    const time = hour+" и "+minutes
+    try{
+        const timeSplit = data["data"]["text"].split("hrs")
+        const hourInt = Number(timeSplit[0])
+        const minutesInt = Number(timeSplit[1].split("mins")[0])
+        const hour = String(hourInt)+" "+declOfNum(hourInt, ["час", 'часа', 'часов']);
+        const minutes = String(minutesInt)+" "+declOfNum(minutesInt, ['минута', 'минуты', 'минут']);
+        const time = hour+" и "+minutes
+        return Response.json({time})
+    }catch (err){
+        return Response.json({"error":"WAKATIME ERROR"})
+    }
 
-    return Response.json({time})
 }
