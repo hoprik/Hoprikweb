@@ -29,6 +29,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Set .env variables
+        run: |
+          touch .env
+          echo WAKATIME_API=$WAKATIME_API >> .env
+          echo MYSQL_HOST=$MYSQL_HOST >> .env
+          echo MYSQL_USER=$MYSQL_USER >> .env
+          echo MYSQL_PASSWORD=$MYSQL_PASSWORD >> .env
+          echo MYSQL_DATABASE=$MYSQL_DATABASE >> .env
+        env:
+          WAKATIME_API: ${{ secrets.WAKATIME_API }}
+          MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+
       - name: Build project
         run: npm run build
 
