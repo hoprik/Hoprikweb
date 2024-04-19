@@ -18,7 +18,8 @@ export async function POST(req: Request) {
                 database: process.env.MYSQL_DATABASE
             });
         }catch(err){
-            return Response.json({"error": "Database connection failed"});
+            console.log(err)
+            return Response.json({"error": "Database connection failed"+":"+err});
         }
 
     }
