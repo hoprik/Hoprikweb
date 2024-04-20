@@ -4,27 +4,20 @@ import md5 from 'crypto-js/md5';
 export async function POST(req: Request) {
     let db: mysql.Connection
     try {
-         db = await mysql.createConnection({
+        db = await mysql.createConnection({
             socketPath: "/run/mysqld/mysqld.sock",
             user: process.env.MYSQL_USER,
             password: process.env.MYSQL_PASSWORD,
             database: process.env.MYSQL_DATABASE
         });
     }catch (err){
-        try{
-            db = await mysql.createConnection({
-                host: process.env.MYSQL_HOST,
-                user: process.env.MYSQL_USER,
-                password: process.env.MYSQL_PASSWORD,
-                database: process.env.MYSQL_DATABASE
-            });
-        }catch(err){
-            console.log(err)
-            return Response.json({"error": "Database connection failed"+":"+err});
-        }
-
+        db = await mysql.createConnection({
+            host: process.env.MYSQL_HOST,
+            user: process.env.MYSQL_USER,
+            password: process.env.MYSQL_PASSWORD,
+            database: process.env.MYSQL_DATABASE
+        });
     }
-
 
     const {url} = await req.json()
     if (url == undefined){
