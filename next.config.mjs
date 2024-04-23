@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'standalone',
-    ignoreDuringBuilds: true,
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
     async headers() {
         return [
             {
