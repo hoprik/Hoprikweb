@@ -53,7 +53,7 @@ jobs:
 
       - name: Connect to server netangels
         run: |
-          ssh -i gitauth -L 3306:/run/mysqld/mysqld.sock c87074@h42.netangels.ru
+          ssh -T -i gitauth -L 3306:/run/mysqld/mysqld.sock c87074@h42.netangels.ru
 
       - name: Build project
         run: npm run build
