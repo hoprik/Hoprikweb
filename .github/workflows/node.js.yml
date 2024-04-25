@@ -44,16 +44,14 @@ jobs:
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
           MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
 
-      - name: Set ssh certificate variable
+      - name: Set ssh certificate variable and auth
         run: |
           touch gitauth
           echo $CERTIFICATE >> gitauth
+          chmod 600 gitauth
+          ssh -T -i gitauth -L 3306:/run/mysqld/mysqld.sock c87074@h42.netangels.ru
         env:
           CERTIFICATE: ${{ secrets.CERTIFICATE }}
-
-      - name: Connect to server netangels
-        run: |
-          ssh -T -i gitauth -L 3306:/run/mysqld/mysqld.sock c87074@h42.netangels.ru
 
       - name: Build project
         run: npm run build
