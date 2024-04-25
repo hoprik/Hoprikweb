@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import Link from "next/link";
+import {Gameoflife} from "@/components/gameoflife";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,6 +48,7 @@ export default function RootLayout({
           <link rel="shortcut icon" href="/api/v1/favicon"/>
       </head>
       <body className={inter.className}>{children}</body>
+    {/*<Gameoflife/>*/}
     </html>
   );
 }

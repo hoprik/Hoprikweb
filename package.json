@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "animatext": "^1.0.1",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
     "devicons-react": "^1.3.0",

@@ -44,6 +44,13 @@ jobs:
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
           MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
 
+      - name: Set ssh certificate variable
+        run: |
+          touch gitauth
+          echo $CERTIFICATE >> gitauth
+        env:
+          CERTIFICATE: ${{ secrets.CERTIFICATE }}
+
       - name: Build project
         run: npm run build
 
@@ -57,6 +64,10 @@ jobs:
           echo MYSQL_PASSWORD="" >> .env
           echo MYSQL_DATABASE="" >> .env
 
+      - name: Remove ssh certificate
+        run: |
+          rm -r gitauth
+
       - name: Copy public folder
         run: cp -r ./public ./.next/standalone/
 
@@ -64,7 +75,7 @@ jobs:
         run: mkdir -p ./.next/standalone/.next/static && cp -r ./.next/static/* ./.next/standalone/.next/static/
 
       - name: Create readme.txt
-        run: echo 'Hello it'\''s build https://hoprik.ru/ №${{ github.run_number }}, for start working server you need. Node js min 18v and env VARIABLES WAKATIME_API, MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE, HOSTNAME (optional), PORT (optional). After set you go to cmd and write command node server.js. And if you did not specify HOSTNAME and PORT, server opened in localhost:3000 Happy stealing ^_____^' > ./.next/standalone/readme.txt
+        run: echo 'Hello it'\''s build https://hoprik.ru/ №${{ github.run_number }}, for start working server you need. Node js min 18v and env VARIABLES WAKATIME_API, MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE, HOSTNAME (optional), PORT (optional). After set you go to cmd and write command node server.js. And if you did not specify HOSTNAME and PORT, server opened in localhost:3000 Happy hacking ^_____^' > ./.next/standalone/readme.txt
 
       - name: Archive production artifacts (tar.gz)
         run: cd ./.next/standalone && tar -czvf ../../build-number-${{ github.run_number }}.tar.gz .
