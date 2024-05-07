@@ -1,7 +1,6 @@
-import mysql from 'mysql2/promise';
-import md5 from 'crypto-js/md5';
+import mysql from "mysql2/promise";
 
-export async function POST(req: Request) {
+export async function POST(req: Request, res: Response) {
     let db: mysql.Connection
     try{
         try {
@@ -24,22 +23,29 @@ export async function POST(req: Request) {
         console.log(err)
         return Response.json({"error": "Database connection failed"+":"+err});
     }
+    const json = await req.json();
+    const login = json["login"]
+    const password = json["password"]
+    const result = await db.query(`SELECT * FROM users WHERE login = "${login}" AND password="${password}"`);
+    await db.end();
 
 
-    const {url} = await req.json()
-    if (url == undefined){
-        return Response.json({"error": "Missing URL"})
+    // @ts-ignore
+    if (result[0].length == 0) {
+        const data = {
+            "success": false,
+            "error": "Ошибка, логин или пароль неверен!"
+        }
+        return Response.json(data);
     }
-    if (!url.startsWith("http")){
-        return Response.json({"error": "Not valid URL"})
+
+    // @ts-ignore
+    const token = result[0][0]["token"]
+    const data = {
+        "success": true,
+        "token": token
     }
-    const crypto = md5(url).toString()
-    let short_url = ""
-    for (let i = 0; i < 6; i++) {
-        short_url+=crypto[i]
-    }
-    await db.query(`INSERT INTO shorturl (url, code) VALUES ('${url}', '${short_url}')`)
-    await db.commit()
-    await db.end()
-    return Response.json({"url": short_url})
+
+    // @ts-ignore
+    return Response.json(data)
 }

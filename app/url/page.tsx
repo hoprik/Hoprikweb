@@ -32,7 +32,7 @@ async function genURL(button: any){
     input.remove()
     _button.remove()
     // @ts-ignore
-    wrapper.insertAdjacentHTML("beforeend", "<p class=\"texturl "+link+"\" style=\"color:white;font-size: 32px;\">"+location.host+"/u/"+link+"</p> <button class=\"buttonurl\">Скопировать</button>")
+    wrapper.insertAdjacentHTML("beforeend", "<p class=\"texturl "+link+"\" style=\"color:white;font-size: 32px;\">https://"+location.host+"/u/"+link+"</p> <button class=\"buttonurl\">Скопировать</button>")
     // @ts-ignore
     document.querySelector(".buttonurl").addEventListener("click", copyText)
 
@@ -44,7 +44,7 @@ function copyText(){
     const p = document.querySelector(".texturl")
     // @ts-ignore
     const url = p.classList[1];
-    navigator.clipboard.writeText(location.host+"/u/"+url);
+    navigator.clipboard.writeText("https://"+location.host+"/u/"+url);
     _button.innerText = "Скопированно"
 }
 

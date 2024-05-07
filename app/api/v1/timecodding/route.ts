@@ -7,7 +7,7 @@ function declOfNum(n: number, text_forms: [String, String, String]) {
     return text_forms[2];
 }
 
-export async function GET() {
+export async function POST() {
     const options = {
         method: 'GET',
         headers: {

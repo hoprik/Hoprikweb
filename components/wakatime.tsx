@@ -5,7 +5,7 @@ export default function Wakatime() {
     const [wakaTime, setWakaTime] = useState("0 часов 0 минут")
     useEffect(() => {
         const options = {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'User-Agent': 'insomnia/8.6.1',
                 cache: 'no-store'

@@ -22,7 +22,7 @@ export default function ProjectCards() {
     const [projectcards, setProjectsCard] = useState("0")
     useEffect(() => {
         const options = {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'User-Agent': 'insomnia/8.6.1',
                 cache: 'no-store'
