@@ -57,10 +57,6 @@ jobs:
           echo MYSQL_PASSWORD="" >> .env
           echo MYSQL_DATABASE="" >> .env
 
-      - name: Remove ssh certificate
-        run: |
-          rm -r gitauth
-
       - name: Copy public folder
         run: cp -r ./public ./.next/standalone/
 
