@@ -15,7 +15,7 @@ export default function Auth() {
             body: `{"login":"${email}","password":"${password}"}`
         };
 
-        const res = await fetch('http://localhost:3000/api/v1/auth/tryLogin', options)
+        const res = await fetch('/api/v1/auth/tryLogin', options)
         if (res.status !== 200) {
             setError("Неизвестная ошибка: "+res.status);
             return
