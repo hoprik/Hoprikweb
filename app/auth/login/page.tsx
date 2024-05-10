@@ -23,7 +23,12 @@ export default function Auth() {
         const json = await res.json()
         if ("success" in json){
             if (json["success"]) {
-                location.href = "http://"+location.host+"/auth/success/?token="+json["token"]
+                if (process.env.NODE_ENV !== "production") {
+                    location.href = "http://"+location.host+"/auth/success/?token="+json["token"]
+                }else {
+                    location.href = "https://"+location.host+"/auth/success/?token="+json["token"]
+                }
+
             }
             else{
                 setError(json["error"])
