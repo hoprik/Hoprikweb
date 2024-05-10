@@ -17,29 +17,28 @@ export default function Auth() {
 
         const res = await fetch('/api/v1/auth/tryLogin', options)
         if (res.status !== 200) {
-            setError("Неизвестная ошибка: "+res.status);
+            setError("Неизвестная ошибка: " + res.status);
             return
         }
         const json = await res.json()
-        if ("success" in json){
+        if ("success" in json) {
             if (json["success"]) {
                 if (process.env.NODE_ENV !== "production") {
-                    location.href = "http://"+location.host+"/auth/success/?token="+json["token"]
-                }else {
-                    location.href = "https://"+location.host+"/auth/success/?token="+json["token"]
+                    location.href = "http://" + location.host + "/auth/success/?token=" + json["token"]
+                } else {
+                    location.href = "https://" + location.host + "/auth/success/?token=" + json["token"]
                 }
 
-            }
-            else{
+            } else {
                 setError(json["error"])
             }
         }
 
     }
-    const email_change = (e: any)=>{
+    const email_change = (e: any) => {
         setEmail(e.target.value)
     }
-    const password_change = (e: any)=>{
+    const password_change = (e: any) => {
         setPassword(e.target.value)
     }
     return (
