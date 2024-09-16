@@ -16,7 +16,7 @@ function getProjects(projects: any){
     }
     return projects_array;
   }
-  
+
 
 export default function ProjectCards() {
     const [projectcards, setProjectsCard] = useState("0")
@@ -38,7 +38,7 @@ export default function ProjectCards() {
         <div className="thirdpage_floor" key={i}>
         {
             project.map((item: JSX.Element) => {
-            return item
+                return item
             })
         }
         </div>
