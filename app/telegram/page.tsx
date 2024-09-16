@@ -1,11 +1,20 @@
-'use client'
-import {useEffect} from "react";
+'use client';
+
+import { useEffect, Suspense } from "react";
 import Page from "@/components/page";
-import {useSearchParams} from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function Main(){
-    const searchParams = useSearchParams()
-    const url = searchParams.get('url')
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <InnerComponent />
+        </Suspense>
+    );
+}
+
+function InnerComponent() {
+    const searchParams = useSearchParams();
+    const url = searchParams.get('url');
     useEffect(()=>{
         setTimeout(()=>{
             // @ts-ignore
@@ -14,12 +23,12 @@ export default function Main(){
             tg.sendData(JSON.stringify(data));
             tg.close()
         }, 100)
-    }, [])
-    return <>
+    }, []);
+    return (
         <Page>
             <div className="payment-wrapper">
                 <h1 className="success-info">Загрузка....</h1>
             </div>
         </Page>
-    </>
+    );
 }
