@@ -1,44 +1,62 @@
-"use client"
-
+import {redirect} from "next/navigation";
+import mysql from "mysql2/promise";
+import Navbar from "@/components/navbar";
+import Mobilenavbar from "@/components/mobilenavbar";
 import Page from "@/components/page";
+import End from "@/components/end";
 
-async function getUrl(url: string) {
-    const options = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.6.1', cache: 'no-store'},
-        body: '{"code":"'+url+'"}',
-    };
-
-    const res = await fetch('/api/v1/link/get', options)
-    const json = await res.json()
-    if ("url" in json){
-        return {"url":json["url"]}
-    }else{
-        return {"error":json["error"]}
+async function getUrl(code: string) {
+    let db: mysql.Connection
+    try{
+        try {
+            db = await mysql.createConnection({
+                socketPath: "/run/mysqld/mysqld.sock",
+                user: process.env.MYSQL_USER,
+                password: process.env.MYSQL_PASSWORD,
+                database: process.env.MYSQL_DATABASE
+            });
+        }catch (err){
+            db = await mysql.createConnection({
+                host: process.env.MYSQL_HOST,
+                user: process.env.MYSQL_USER,
+                password: process.env.MYSQL_PASSWORD,
+                database: process.env.MYSQL_DATABASE
+            });
+        }
+    }
+    catch(err){
+        return undefined
+    }
+    if (code == undefined){
+        await db.end()
+        return undefined
+    }
+    const [result]: any = await db.query(`select * from shorturl where code = "${code}"`)
+    await db.end()
+    try {
+        return result[0].url
+    }catch(err){
+        return undefined
     }
 
 
 }
 
-function Redirects({params}: {params: {url: string}}) {
-    const _url = getUrl(params.url)
-    // @ts-ignore
-    _url.then(e=>{
-        if ("url" in e){
-            location.href = e.url
-        }
-        else{
-            location.href = "https://hoprik.ru/"
-        }
-    })
-
-    return <>
-        <Page>
-            <div className="payment-wrapper">
-                <h1 className="success-info">Перенаправляем....</h1>
-            </div>
-        </Page>
-    </>
+export default async function Redirects({params}: {params: {url: string}}) {
+    const redirectUrl = await getUrl(params.url);
+    if (!redirectUrl) {
+        return <>
+            <Navbar/>
+            <Mobilenavbar/>
+            <Page>
+                <div className="payment-wrapper">
+                    <h1 className="success-info" style={{fontSize: "32px"}}>Ошибка ссылка не найдена</h1>
+                </div>
+            </Page>
+            <End/>
+        </>
+    }
+    else{
+        redirect(redirectUrl)
+    }
 }
-
-export default Redirects

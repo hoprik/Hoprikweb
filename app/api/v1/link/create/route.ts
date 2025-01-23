@@ -28,9 +28,11 @@ export async function POST(req: Request) {
 
     const {url} = await req.json()
     if (url == undefined){
+        await db.end()
         return Response.json({"error": "Missing URL"})
     }
     if (!url.startsWith("http")){
+        await db.end()
         return Response.json({"error": "Not valid URL"})
     }
     const crypto = md5(url).toString()

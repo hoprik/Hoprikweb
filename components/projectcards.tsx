@@ -16,7 +16,7 @@ function getProjects(projects: any){
     }
     return projects_array;
   }
-  
+
 
 export default function ProjectCards() {
     const [projectcards, setProjectsCard] = useState("0")
