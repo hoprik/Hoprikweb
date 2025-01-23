@@ -332,6 +332,7 @@ body{
 }
 
 .projectcart_devitems{
+  display: flex;
   min-height: 40px;
   margin: 10px 5px;
 }
