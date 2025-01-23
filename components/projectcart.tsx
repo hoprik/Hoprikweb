@@ -2,8 +2,8 @@ import Icon from "./icons";
 function ProjectCart(props: any) {
     const { projectName = "Project name", projectDescription = "Project description", projectTools = ["google"], projectUrl, image=null } = props;
     const tools:any = [];
-    projectTools.forEach((tool:string) =>{
-        tools.push(<Icon nameIcon={tool}/>)
+    projectTools.map((tool:string, key: number) =>{
+        tools.push(<Icon key={key} nameIcon={tool}/>)
     })
     return <div className="projectcart">
         <div className="projectcart_image"><img className="projectcart_image_img" src={image}/></div>

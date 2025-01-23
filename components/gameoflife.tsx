@@ -1,30 +1,31 @@
 "use client"
 
-const WIDTH = document.documentElement.clientWidth
-const HEIGHT = document.documentElement.clientHeight
-let state = new Array(WIDTH);
-function init() {
+import {useEffect, useRef} from "react";
+
+let WIDTH: number;
+let HEIGHT: number;
+let state: Array<Array<boolean>>;
+function init(canvas: HTMLCanvasElement) {
     for(let i = 0; i < WIDTH; i++) {
         state[i] = new Array(HEIGHT);
         for(let j = 0; j < HEIGHT; j++) {
-            state[i][j] = Math.random() < 0.1;
+            state[i][j] = Math.random() < 0.07;
         }
     }
-    setInterval(game_loop, 33);
-    console.log("canvas load")
+    setInterval(()=>game_loop(canvas), 100);
 }
 
-function game_loop() {
+function game_loop(canvas: HTMLCanvasElement) {
     let n_neighbors;
-    for(let i = 0; i < WIDTH; i++) {
-        for(let j = 0; j < HEIGHT; j++) {
+    for(let i = 0; i < WIDTH/2; i++) {
+        for(let j = 0; j < HEIGHT/5; j++) {
             n_neighbors = num_neighbors(i,j);
             state[i][j] = (state[i][j]) ?
                 n_neighbors == 2 || n_neighbors == 3 :
                 n_neighbors == 3;
         }
     }
-    draw();
+    draw(canvas);
 }
 
 function num_neighbors(x: number, y: number) {
@@ -64,16 +65,20 @@ function num_neighbors(x: number, y: number) {
     return total;
 }
 
-function draw() {
-    let canvas = document.getElementById('bg');
+function draw(canvas: HTMLCanvasElement) {
     // @ts-ignore
     if(canvas.getContext) {
         // @ts-ignore
         var ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,500,500);
-        for(let i = 0; i < 500; i+=5) {
-            for(let j = 0; j < 500; j+= 5) {
-                if(state[i / 5][j / 5]) ctx.fillRect(i, j, 5, 5);
+        // @ts-ignore
+        ctx.clearRect(0,0,WIDTH,HEIGHT);
+        for(let i = 0; i < WIDTH; i+=5) {
+            for(let j = 0; j < HEIGHT; j+= 5) {
+                if(state[i / 5][j / 5]) { // @ts-ignore
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'
+                    // @ts-ignore
+                    ctx.fillRect(i, j, 5, 5);
+                }
             }
         }
     }
@@ -81,12 +86,27 @@ function draw() {
 
 export function Gameoflife() {
     // Based on http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
-    const WIDTH = document.documentElement.clientWidth
-    const HEIGHT = document.documentElement.clientHeight
+    const canvas = useRef<HTMLCanvasElement>(null);
+
+    useEffect(() => {
+        if (canvas.current != null){
+            WIDTH = document.documentElement.clientWidth
+            HEIGHT = document.documentElement.clientHeight
+            state = new Array(WIDTH);
+            const ctx = canvas.current.getContext('2d')
+            if (ctx){
+                ctx.clearRect(0,0, WIDTH, HEIGHT)
+            }
+            canvas.current.width = WIDTH;
+            canvas.current.height = HEIGHT;
+            init(canvas.current)
+        }
+
+    }, []);
 
     return (
         <>
-            <canvas id="bg" width={WIDTH} height={HEIGHT} onLoad={e=>init()}/>
+            <canvas className='fixed top-0 left-0 -z-10' ref={canvas}/>
         </>
     );
 }

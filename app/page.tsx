@@ -5,15 +5,13 @@ import About from "@/components/about";
 import Socialbutton from "@/components/socialbutton";
 import Mobilenavbar from "@/components/mobilenavbar";
 import End from "@/components/end";
-import projects from '@/public/projects.json'
-import Story from "@/components/story"
 import Wakatime from "@/components/wakatime"
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import ProjectCards from "@/components/projectcards";
-import ClientAbout from "@/components/clientabout";
-function getExactAge(date: any) {
+
+function getExactAge(date: string) {
     dayjs.extend(utc);
     dayjs.extend(timezone);
 
@@ -25,60 +23,30 @@ function getExactAge(date: any) {
 }
 
 
-
-function Main(){
+function Main() {
     const year = getExactAge("2008.10.10")
     return <>
         <Navbar/>
         <Mobilenavbar/>
         <main>
             <Page>
-                <div className="firstpage">
-                    <div className="firstpage_logo">
-                        <h1 className="firstpage_logo_h1">Hoprik</h1>
-                        <a href="#info" className="firstpage_logo_button">Исследовать</a>
+                <div className='mx-auto mt-[100px] w-1/2 flex flex-col'>
+                    <Image className='mx-auto' src='/hoprik.png' width={192} height={192} alt='hoprik'/>
+                    <p className='text-center text-white text-5xl font-black'>Hoprik</p>
+                    <div id='info' className='border-2 p-10 rounded'><p className='text-3xl text-white'>Привет, меня зовут
+                        Хоприк. Мне {year} лет и увлекаюсь программированием. Я занимаюсь этим
+                        уже <Wakatime/> и владею такими языками и технологиями, как python, java, c#, frontend, js,
+                        react, express и другие. Кроме того, я интересуюсь другими IT-направлениями: 3D-моделированием,
+                        видеомонтажом, фотошопом.</p>
                     </div>
-                    <div className="firstpage_image">
-                        <Image
-                            src="/main.png"
-                            fill
-                            alt="Picture of the author"
-                            style={{borderRadius: "10px"}}
-                        />
-                    </div>
+                    <p id='social' className='text-white text-3xl font-bold mt-5 mb-5'>Связь</p>
+                    <a className='text-white hover:underline' href='https://t.me/hoprik'>Telegram</a>
+                    <a className='text-white hover:underline' href='https://github.com/hoprik'>Github</a>
+                    <a className='text-white hover:underline' href='https://mynickname.com/hoprik'>MyNickname</a>
+                    <a className='text-white hover:underline' href='mailto:42morozov42@gmail.com'>Gmail</a>
                 </div>
-            </Page>
-            <Page anchor="info">
-                <div className="secondpage">
-                    <About url={"/terraia.png"}>
-                        Привет, меня зовут Хоприк. Мне {year} лет и увлекаюсь программированием. Я занимаюсь этим уже <Wakatime/> и владею такими языками и технологиями, как python, java, c#, frontend, js, react, express и другие. Кроме того, я интересуюсь другими IT-направлениями: 3D-моделированием, видеомонтажом, фотошопом.
-                    </About>
-                    <ClientAbout/>
-                    <About url="/haha.png" >
-                        <Story/>
-                    </About>
-                </div>
-            </Page>
-            <Page anchor="projects">
-                <div className="thirdpage">
-                    <ProjectCards/>
-                </div>
-            </Page>
-            <Page anchor="social">
-                <div className="fourthpage">
-                    <div className="fourthpage_floor">
-                        <Socialbutton network="youtube" href="https://www.youtube.com/@hoprik0059" text="Youtube" color="#FF0000"/>
-                        <Socialbutton network="email" href="mailto:42morozov42@gmail.com" text="Почта" color="#FF8A00"/>
-                    </div>
-                    <div className="fourthpage_floor">
-                        <Socialbutton network="github" href="https://www.github.com/hoprik" text="GitHub" color="#5E5E5E"/>
-                        <Socialbutton network="vk" href="https://vk.com/valeramorozov2016" text="Вконтакте" color="#00A3FF"/>
-                    </div>
-                    <div className="fourthpage_floor">
-                        <Socialbutton network="telegram" href="https://t.me/hoprik" text="Telegram" color="#0071F5"/>
-                        <Socialbutton href="https://mynickname.com/id1782903" text="My nickname" color="#B14000"/>
-                    </div>
-                </div>
+                <p id='projects' className='text-white text-3xl font-bold text-center mt-10'>Проекты</p>
+                <ProjectCards/>
             </Page>
         </main>
         <End/>

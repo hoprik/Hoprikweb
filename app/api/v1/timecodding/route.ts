@@ -20,7 +20,7 @@ export async function POST() {
     const data = await res.json()
     try{
         const timeSplit = data["data"]["text"].split("hrs")
-        const hourInt = Number(timeSplit[0])
+        const hourInt = Number(timeSplit[0].replace(',', ''))
         const minutesInt = Number(timeSplit[1].split("mins")[0])
         const hour = String(hourInt)+" "+declOfNum(hourInt, ["час", 'часа', 'часов']);
         const minutes = String(minutesInt)+" "+declOfNum(minutesInt, ['минута', 'минуты', 'минут']);

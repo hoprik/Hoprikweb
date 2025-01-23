@@ -7,9 +7,9 @@ function getProjects(projects: any){
     let array: any = [];
     let size: number = 3;
     let projects_array = [];
-    Object.keys(json).forEach(item=>{
+    Object.keys(json).map((item, key)=>{
       const project = json[item];
-      array.push(<Projectcart projectName = {project.name} projectDescription = {project.desc} projectTools = {project.tools} projectUrl={project.url} image={project.image}/>)
+      array.push(<Projectcart key={key} projectName = {project.name} projectDescription = {project.desc} projectTools = {project.tools} projectUrl={project.url} image={project.image}/>)
     })
     for (let i = 0; i < Math.ceil(array.length / size); i++) {
       projects_array[i] = array.slice(i * size, (i + 1) * size);
@@ -38,7 +38,7 @@ export default function ProjectCards() {
         <div className="thirdpage_floor" key={i}>
         {
             project.map((item: JSX.Element) => {
-            return item
+                return item
             })
         }
         </div>

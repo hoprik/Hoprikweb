@@ -26,10 +26,6 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
-        <Script
-            src="https://telegram.org/js/telegram-web-app.js"
-            strategy="beforeInteractive"
-        />
           <Script id="yandex-metrika">
               {`
                (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -45,10 +41,8 @@ export default function RootLayout({
            });
       `}
           </Script>
-          <link rel="shortcut icon" href="/api/v1/favicon"/>
       </head>
-      <body className={inter.className}>{children}</body>
-    {/*<Gameoflife/>*/}
+      <body className={inter.className}>{children}<Gameoflife/></body>
     </html>
   );
 }
